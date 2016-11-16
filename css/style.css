@@ -1,0 +1,79 @@
+#header1{
+	text-align: center;
+	color: black;
+}
+
+.boxed {
+  
+	height: 280px;
+	width :700px;
+	background-color:  gainsboro;
+	
+	margin: 0 auto;
+}
+
+#bookmark{
+	height:auto;
+	width: 700px;
+	background-color: white;
+	margin: auto;
+	color:blue;
+	text-align: center;
+}
+
+.myButton1{
+	margin-left: 50px;
+	width: 200px;
+	height: 40px;
+	background-color: skyblue;
+	font-size: 20px;
+}
+
+
+#fix1{
+	color: blue;
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-bottom: auto;
+	
+}
+
+#start{
+	font-size: 250%;
+	text-align: center;
+	font-weight: bold;
+
+}
+
+.para1{
+	height:auto;
+	width: 700px;
+	background-color: white;
+	margin: auto;
+	
+}
+
+.what{
+	font-size: 150%;
+	font-weight: bold;
+}
+
+#span1{
+	color: blue;
+	font-size: 110%;
+}
+
+#req1{
+	background-color: papayawhip;
+	text-align: left;
+	border: 1px solid black;
+	font-size: 100%;
+}
+
+
+
+
+
+
+
+
