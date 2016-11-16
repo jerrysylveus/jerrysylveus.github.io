@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html>
+<head>
+				<meta charset="utf-8">
+				<meta name="viewport" content="width=device-width, initial-scale=1.0">
+				<title></title>
+	
+	
+	
+ 
+	
+	
+	<p id = "bookmark"> <a href="#start">Let's Get Started </a> </p>
+	
+	<p id = "bookmark"> <a href="#anchor1">Making HTTP Calls / Requests With Javascript </a> </p>
+	
+	<p id = "bookmark"> <a href="#anchor2">A Practical Example Of A Call Using A Get Request </a> </p>
+	
+	
+	<p id = "bookmark"> <a href="#anchor3">A Practical Example Of A Call Using A Post Request </a> </p>
+	
+	
+	
+	<p id = "bookmark"> <a href="#anchor4">Asynchronous API Calls </a> </p>
+	
+	<p id = "bookmark"> <a href="#anchor5">Getting Started With the Google Fit Rest API </a> </p>
+	
+	<p id = "bookmark"> <a href="#anchor6">Create Data Source </a> </p>
+	
+
+	
+	
+	<div class="boxed">
+		<h1 id="header1">GET STARTED HOW-TO-GUIDE TO THE GOOGLE FIT REST API </h1>
+	
+		<h3><center>WRITTEN BY JERRY SYLVEUS</center></h3>
+	
+		<div id="fix1"> This tutorial is a step by step guide on how to use the <a href="https://developers.google.com/fit/rest/"><span id="span1">google fit Rest API </span></a>.  This is a beginner's tutorial.  For those that are experience programmers this guide is not for you.  It is assume that you have a working knowledge of CSS, Javascript and HTML.  Click any of the links below to get started with Javascript CSS &amp; HTML if you don't have any knowledge of those programming languages.   </div>
+		
+		<br>
+		<form>
+			<input class="myButton1" type="button" value="Javascript" onclick="window.location.href = 'https://www.codecademy.com/learn/javascript'"> 
+			
+			<input class="myButton1" type="button" value="HTML &amp; CSS" onclick="window.location.href = 'https://www.codecademy.com/learn/web'">
+		</form>
+	</div>
+	
+	
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
+	
+</head>
+
+
+	
+
+
+
+
+
+<body>
+
+	<br>
+	<br>
+	
+	
+
+	
+	<div class="para1">
+		<p id="start">Let's Get Started</p>
+		
+		<p class="what">What is an API?</p>
+		
+		<p>Application program interface API is defined as a set of routines protocols and tools for building software applications.  What does that mean exactly?  While, in school (OSU) taking a web development class (CS 290) I was given a simple explanation which explains what an API is in simple terms.  I was told to think of it that way. "In C++ programming, you probably have had different files with different functions.  One file might include headers from another, and then it could call functions from that file.  Or you might import libraries to have acess to things like IO so you can output to the console.  Some programs are just functions.  So they are not really a program but more like a library.  It has a bunch of functions you can call that to do various useful things, but it is not a program itself.  <a href="http://www.cplusplus.com/reference/istream/iostream/"><span id="span1">Iostream </span></a>  in C++ isn't a program, it won't do anything if you run it but it lets your program do important things like output to the command line.  An API is a lot like this.  It provides certain functions you can call that do useful things."  I hope that helps clear things up a bit because it did for me.  Now let's move on to some fun things.</p>
+		
+		
+		<br>
+		<p class="what" id = "anchor1">Making HTTP Calls / Requests With Javascript</p>
+		
+		<p>The Javascript browser can make HTTP requests through an inter  face that is known as <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest"><span id="span1"> XMLHttpRequest</span></a>.  This allows for information to be transferred back and forth from a web browser and a web server in which a client can receive information from some distant server somewhere.  Now that we have a bit of background as to how a request can be made, let's look at some examples.  There are two ways requests can be made.  They are <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Synchronous_and_Asynchronous_Requests"><span id="span1">Synchronous </span></a> request which is pretty simple and straight forward, and <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Synchronous_and_Asynchronous_Requests"><span id="span1">Asynchronous </span></a> request with AJAX, which is a little bit more complicated. Take a look at the code below.</p> 
+		
+		<textarea id="req1" rows="8" cols="60"> 
+		
+	1. 	var req = new XMLHttpRequest();
+	2. 	req.open("GET", "theUrl", false);
+	3. 	req.send(null);
+	4. 	console.log(JSON.parse(req.responseText));
+	5. 	// → This is the content of data.txt
+			
+		</textarea>
+		
+		
+		<p> Now let's get to it.  The <strong>XMLHttpRequest()</strong> in line (1) is the part that allows information to be transferred back and forth from a browser to a server as described earlier.  It receives the request and returns data from that specific request.  It is assigned the variable req.</p>
+		
+		<p> For line number (2) the variable req is used with the <strong> open </strong> method to make a <a href="http://www.w3schools.com/tags/ref_httpmethods.asp"><span id="span1"> GET </span></a> request to whatever URL we are using.  We can also make a <a href="http://www.w3schools.com/tags/ref_httpmethods.asp"><span id="span1"> POST </span></a> request.  More about this later.   Typically the GET method requests data from a specified resource thus in this case <strong>"the URL"</strong>.  We will get into more details in a little bit about the URL that the request is being requested from.  Last but not least is <strong>false</strong>.  False is used to inform that the request being sent is Synchronous.  To reiterate <strong>FALSE is used to inform that the request being sent is SYNCHRONOUS</strong>. </p>
+		
+		<p> Next in Line number (3), the request is passed <strong>null</strong> meaning that there are no more information to be sent.  Followed by line 4 in which the javascript object is parsed from a JSON string and logs to the console the <strong>responseText</strong>.</p>
+		
+		
+		<p class="what" id = "anchor2">A Practical Example Of A Call Using A Get Request.  </p>
+		
+		<p>For this example we are going to use the <a href="http://openweathermap.org"><span id="span1"> OpenWeatherMap  </span></a>  website.  They are a simple and fast API that gives access to current weather, forecasts, maps and historical data in JSON, XML, and HTML formats. More information is on their website click on the link provided in  the first line of this paragraph.  When you go on the website, scroll down and click on the how to start tab.  It will take you to this <a href="http://openweathermap.org/appid"><span id="span1"> link </span></a> to get started.  Follow the instructions there.  After you have gotten your API key go <a href="http://openweathermap.org/api"><span id="span1"> here </span></a>.  Under <strong>Current weather data </strong> click API doc.  As a side note, if you want an editor for HTML, CSS, and Javascript I would advise to use <a href="http://brackets.io"><span id="span1"> Adobe Brackets </span></a>.  It's free to download.  If not find something else that you like and use it.  In addition, JS fiddle does not support AJAX API requests.  Making API calls are easier by using local HTML documents hence the use of Adobe Brackets.</p>
+		
+		<textarea id="req1" rows="12" cols="80"> 
+		
+				&lt;!DOCTYPE html&gt;
+	&lt;html&gt;
+  	&lt;!--(head)--&gt;
+    &lt;script&gt;
+      		var req = new XMLHttpRequest();
+      		req.open("GET", "http://api.openweathermap.org/data/2.5/weather?	  lat=35&amp;lon=139,or&amp;appid=YOUR APPID GOES HERE", false);
+      		req.send(null);
+      		console.log(JSON.parse(req.responseText));
+    &lt;/script&gt;
+  	&lt;!--(/head)--&gt;
+  	&lt;body&gt;
+  	&lt;/body&gt;
+	&lt;/html&gt;
+		
+		</textarea>
+		
+		<p><strong>This is the response or result you should get if everything went well.</strong></p>
+		
+		
+		
+ 	<textarea id="req1" rows="13" cols="80"> 
+		
+  {"coord":{"lon":139,"lat":35},
+  "sys":{"country":"JP","sunrise":1369769524,"sunset":1369821049},
+  "weather":[{"id":804,"main":"clouds","description":"overcast clouds","icon":"04n"}],
+  "main":{"temp":289.5,"humidity":89,"pressure":1013,"temp_min":287.04,"temp_max":292.04},
+  "wind":{"speed":7.31,"deg":187.002},
+  "rain":{"3h":0},
+  "clouds":{"all":92},
+  "dt":1369824698,
+  "id":1851632,
+  "name":"Shuzenji",
+"cod":200
+		
+	</textarea>
+		
+	<p>Now let's talk about the <strong>req.open</strong> line specifically the <strong>URL</strong> portion of it.  Everything else we have already talked about.  For the OpenWeatherMap website, the <strong>main URL </strong> that is used is <strong>api.openweathermap.org/data/2.5/weather?</strong>.  The rest that comes after is based on wether if you are trying to get the weather by <strong>zip code, city name, city Id, geographical coordinates etc.. </strong>  In the example that we did, the part after the main URL was shown with geographical coordinates.  We had <strong>lat=35&amp;lon=139</strong>. The (lat = and lon =) contain the coordinates for the place we are trying to get the weather for.  Obviously, the lat, and lon, will be different for each city or town.&nbsp;<br> </p>
+		
+		
+	<p><strong>Let's look at another example:</strong></p>
+		
+	
+		
+	<textarea id="req1" rows="16" cols="80"> 
+		
+				&lt;!DOCTYPE html&gt;
+	&lt;html&gt;
+  	&lt;!--(head)--&gt;
+    &lt;script&gt;
+      		var req = new XMLHttpRequest();
+      		req.open("GET", "http://api.openweathermap.org/data/2.5/weather?zip=94040,us,or&amp;appid=YOUR APPID GOES HERE", false);
+      		req.send(null);
+      		console.log(JSON.parse(req.responseText));
+    &lt;/script&gt;
+  	&lt;!--(/head)--&gt;
+  	&lt;body&gt;
+  	&lt;/body&gt;
+	&lt;/html&gt;	
+	</textarea>
+	
+	<p>In this example the only thing that is different is that we have <strong>(zip=94040, us,) </strong> in the req.open line.  This only tells us that we are getting the weather by zip code for a city in the U.S.  You can try this by using the zip code for the city in which you currently reside in.</p>
+		
+	<p>API response should be:</p>
+		
+	<textarea id="req1" rows="16" cols="80">
+	{"coord":{"lon":-122.09,"lat":37.39},
+"sys":      {"type":3,"id":168940,"message":0.0297,"country":"US","s unrise":1427723751,"sunset":1427768967},
+"weather":[{"id":800,"main":"Clear","description":"Sky is Clear","icon":"01n"}],
+"base":"stations",
+"main":{"temp":285.68,"humidity":74,"pressure":1016.8,"temp_min":284.82,"temp_max":286.48},
+"wind":{"speed":0.96,"deg":285.001},
+"clouds":{"all":0},
+"dt":1427700245,
+"id":0,
+"name":"Mountain View",
+"cod":200}
+	
+	</textarea>
+		
+	<br>	
+	<p class="what" id = "anchor3">A Practical Example Of A Call Using A Post Request.  </p>
+	
+	<p>We used the <strong>get request</strong> earlier to fetch and find data.  Now we will be using the <strong> post request to actualize and create data.</strong>  Take a look at this example below.  We are using the google <a href="https://developers.google.com/url-shortener/v1/getting_started#intro"><span id="span1"> API URL Shortener </span></a>.  This API  uses a POST to create data. </p>
+	
+	<textarea id="req1" rows="18" cols="80">
+		
+		<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      1.  var req = new XMLHttpRequest();
+      2.  req.open("POST", "https://www.googleapis.com/urlshortener/v1/url?key=YOUR API KEY GOES HERE", false);
+      3.  req.setRequestHeader('Content-Type', 'application/json');
+      4.  req.send('{"longUrl":"http://www.google.com"}');
+      5.  console.log(JSON.parse(req.responseText));
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
+		
+	</textarea>
+	
+		<p>We have a couple new things here, but the rest should look familiar to you.  In addition, you will need to create an  <a href="https://developers.google.com/url-shortener/v1/getting_started#intro"><span id="span1"> API Key </span></a> or an <a href="https://developers.google.com/url-shortener/v1/getting_started#intro"><span id="span1">  OAuth 2.0 token </span></a> to be able to make the API calls for the URL shortner.  Morevoer,  we are not going to go over number 1, we did that already.  For <strong>number 2</strong>, the only difference is that we use <strong>POST</strong> instead of <strong>GET</strong>.  In addition, line number 2 also has <strong>false</strong> after the API ID, which means that it is a <strong>synchronous</strong> call. Then we have the URL that is to be used to make the API request, followed by your API key.   Let'st get to the differences between Get and Post.  In <strong>line number 3</strong>, the request header is to be sent as <strong>application/json</strong>.  The URL that will be shortened has to be interpreted as a JSON string.  In <strong>line number 4</strong>, we have a property name longurl followed by the URL that is to be shortened.  If everything works accordingly, we get the following response:   </p>
+		
+	<textarea id="req1" rows="5" cols="80">
+   {
+    "kind": "urlshortener#url",
+    "id": "http://goo.gl/fbsS",
+    "longUrl": "http://www.google.com/"
+   }
+	
+	</textarea>
+	
+	<p>According to this <a href="https://developers.google.com/url-shortener/v1/getting_started#shorten"><span id="span1"> link</span></a> here, <strong>id</strong> is the short URL that expands to the long URL you provided. If your request includes an auth token, then this URL will be unique. If not, then it might be reused from a previous request to shorten the same URL. <strong>longUrl</strong> is the long URL to which it expands. In most cases, this will be the same as the URL you provided. In some cases, the server may canonicalize the URL. For instance, if you pass http://www.google.com, the server will add a trailing slash.  </p>
+		
+		
+	<p class="what" id = "anchor4">Asynchronous API Calls.  </p>
+
+	<p>For this example we are going back to the OpenWeatherMap API to make an asynchronous call.</p>
+	
+	<textarea id="req1" rows="20" cols="85">
+	function openWeatherMap(){
+	
+document.getElementById("citySubmit").addEventListener("click", function(event){
+		var req = new XMLHttpRequest();
+		
+		var input = document.getElementById("cityOrZip").value;
+		
+		if(!isNaN(cityOrZip)){
+			req.open("GET","http://api.openweathermap.org/data/2.5/weather?zip=" + input +",us,or&appid=fa7d80c48643dfadde2cced1b1be6ca1", true);
+		}
+		if(isNaN(cityOrZip)){
+		req.open("GET", "http://api.openweathermap.org/data/2.5/weather?q=" + input + ",or&appid=YOUR APP ID GOES HERE", true);
+		}
+		
+		
+		req.addEventListener("load", function(){
+			if(req.status >= 200 && req.status < 400){
+				var response = JSON.parse(req.responseText);
+				document.getElementById("regTemp").textContent = response.main.temp;
+        		document.getElementById("humid").textContent = response.main.humidity;
+			}
+			else{
+				console.log("Error in network request: " + req.statusText);
+			}
+		});
+	req.send(null);
+        event.preventDefault();
+	});
+	
+}
+</textarea>
+		
+<p>This code is used to get the temperature and humidity of a city in the U.S. by either the city's name or the zip code.  The big difference is that a callback is included in the function in which contains the code to  request the data rather than it being done at a later time.  In addition, an event listener is created, followed by the interface to make the HTTP request.  This should look familiar to you.  Another difference is that in the line with <strong>req.open</strong>, we have <strong>true</strong> instead of false meaning that the call is <strong>asynchronous</strong>. We use the req.open twice to set up that if a city name or a zip code is entered we will get the same results.  Next, we add an event listener to process the code for the request being made that is bound to the load. Then, we do some error checking with the status making sure that it's between 200 and 400.  If it is, we use JSON to parse the request. If not we log an error message to the console.  Finally we prevent default on our fuction to prevent the page from reloading to be able to process the code.  </p>		
+		
+<br>
+<br>
+<p class="what" id = "anchor5">Getting Started With the Google Fit Rest API.  </p>
+
+<p>Now that you have an idea of what making an API call entails, we can get started on the google fit API.  To start, click <a href="https://developers.google.com/fit/rest/v1/get-started"><span id="span1"> here</span></a> to get an OAuth 2.0 Client Id.  Follow the steps listed.  If everything works well and you got an OAuth Id.  Next thing is to click on the <strong>Go to the OAuth Playground </strong> link.  Follow the directions there to get familiar with everything to be able to submit HTTP requests for practice.</p>
+		
+<p>Now we are going to do something useful with the API and we will to take a look at the results that we will get, we need to:</p>
+
+<ul>
+	<li>Set Up a Project.</li>
+	<li>Authenticate Your App.</li>
+	<li>Create a Data Source.</li>
+	
+</ul>
+
+
+
+<p class="what">Setting Up a Project. </p>
+<p>You should have already setting up a project as described in the <a href="https://developers.google.com/fit/rest/v1/get-started"><span id="span1"> Getting Started</span></a> earlier.   </p>
+
+<p class="what">Authenticate Your App. </p>
+		
+<p>This also should have been done in the <a href="https://developers.google.com/fit/rest/v1/get-started"><span id="span1"> Getting Started</span></a> also. </p>
+
+<p class="what" id = "anchor6">Create Data Source</p>
+		
+<p>We are going to use some of the methods that are already provided for this.  When you are in the <a href="https://developers.google.com/oauthplayground/"><span id="span1"> oAuth Playground </span></a> click on the gear icon that is on the far right corner on top of the page.  You will then enter your <strong>oAuth Client Id</strong> and the <strong>oAuth Client Secret</strong> that was obtained.  </p>
+
+		
+<p> We are going to create our own data with the sample codes that are provided.  To create our data we are going to use the post method.  But before we get started, make sure you list the URL <strong>https://developers.google.com/oauthplayground</strong> as a redirect URI.  To do that, go to the console for your project where your oAUth 2.0 client Id is listed.  On the right side where its listed, there will be two dark images, a bin indicating to delete the oAuth Id, and a pen to edit. Click on the pen, and scroll to the bottom, and add the URL provided in the <strong>authorized redirect URIs</strong> box.  Then click save. <br>
+	Within the OAuth Playground, click the fitness v1, then select <strong>https://www.googleapis.com/auth/fitness.activity.write</strong>, and follow the rest of the steps that are listed.  Let's do a quick try out to make sure that everything is working accordingly.  In the request URI box, add this method as a GET <strong>https://www.googleapis.com/fitness/v1/users/me/dataSources</strong>.  This methode is the URI request that is provided by google for the API.
+		</p>
+	<p>The response should be:</p>
+	
+<textarea id="req1" rows="23" cols="85">
+	
+GET /fitness/v1/users/me/dataSources HTTP/1.1
+Host: www.googleapis.com
+Content-length: 0
+Authorization: Bearer ya29.Ci-XA3CRKPMbWlsZh7iMgiz0kJLyY4efViQ6HzhZwjIfFVn-cTySKF3oyNufdt8iTQ
+HTTP/1.1 200 OK
+Content-length: 22
+X-xss-protection: 1; mode=block
+Content-location: https://www.googleapis.com/fitness/v1/users/me/dataSources
+X-content-type-options: nosniff
+Expires: Tue, 15 Nov 2016 19:47:34 GMT
+Vary: Origin,X-Origin
+Server: GSE
+Etag: "J96PEmc8elvR8RpKZ8sKuaX8_zs/vyGp6PvFo4RvsFtPoIWeCReyIC8"
+Cache-control: private, max-age=0, must-revalidate, no-transform
+Date: Tue, 15 Nov 2016 19:47:34 GMT
+X-frame-options: SAMEORIGIN
+Content-type: application/json; charset=UTF-8
+{
+  "dataSource": []
+}
+		
+</textarea>
+
+<p>All the way in the bottom the "dataSource": is empty, meaning that we haven't add any data yet to the request body.</p>
+
+<p>Now, let us create on our own Data with a POST method.  Within the Oauth Playground, follow the directions, and use the provided URI by google as was done before.  We are going to use the sample code provided to do that.  Add this to the request body.</p>
+
+<textarea id="req1" rows="23" cols="85">
+{
+  "dataStreamName": "My Data",
+  "type": "derived",
+  "application": {
+    "detailsUrl": "http://example.com",
+    "name": "My app Example",
+    "version": "1"
+  },
+  "dataType": {
+    "field": [
+      {
+        "name": "steps",
+        "format": "integer"
+      }
+    ],
+    "name": "com.google.step_count.delta"
+  },
+  "device": {
+    "manufacturer": "Google Manufacturer",
+    "model": "MyTablet",
+    "type": "tablet",
+    "uid": "1000001",
+    "version": "1"
+  }
+}
+			
+</textarea>
+
+<p>Let's go over this code a bit.  <strong>dataStreamName</strong> is the name of the data.  I chose to call mine My Data.  Right after, we have the <strong>type</strong> in which informs that raw or derived data can be produced.  In this case, I chose derived data.  Next we have the <strong>application </strong> nested object whose purpose is to send data into the platform.  In that object a detail Url is provided.  I chose example.com: next, comes the name that is used as a way for other developer to find out which rest method created the data source. The version is 1 and it's provided by google.  Then we have the <strong>dataType field[]</strong> in which can have different formats such as "blob"
+"floatList",
+"floatPoint",
+"integer",
+"integerList",
+"map",
+"string".  In addition, the name within the dataType field can be anything.  The requirement is that it needs to be unique.  Next we have the "com.google.step_count.delta" which is provided also by google.  Finally we have the <strong>device nested object</strong>.  The manufacturer is whoever manufacture the product, I choose google for example as the manufacturer.  The model is whatever the model name is by the manufacturer, I called it MyTablet.  The UID is the serial number or any other unique Id for the product.  This number used is a random number, followed is the version which is the version string.  More info about how to format the request body and how to create dataSource can be found <a href="https://developers.google.com/fit/rest/v1/reference/users/dataSources/create"><span id="span1"> here </span></a>.  </p>
+		
+<p>The reponse was:</p>
+		
+<textarea id="req1" rows="23" cols="85">
+   HTTP/1.1 200 OK
+   Content-length: 570
+   X-xss-protection: 1; mode=block
+   X-content-type-options: nosniff
+   Expires: Mon, 01 Jan 1990 00:00:00 GMT
+   Vary: Origin,X-Origin
+   Server: GSE
+   Etag: "J96PEmc8elvR8RpKZ8sKuaX8_zs/dvbVw384rwf49PfvpBGO4IlAWug"
+   Pragma: no-cache
+   Cache-control: no-cache, no-store, max-age=0, must-revalidate
+   Date: Tue, 15 Nov 2016 20:34:21 GMT
+   X-frame-options: SAMEORIGIN
+   Content-type: application/json; charset=UTF-8
+{
+  "dataStreamName": "My Data", 
+  "dataType": {
+    "field": [
+      {
+        "name": "steps", 
+        "format": "integer"
+      }
+    ], 
+    "name": "com.google.step_count.delta"
+  }, 
+  "dataQualityStandard": [], 
+  "application": {
+    "version": "1", 
+    "name": "My app Example", 
+    "detailsUrl": "http://example.com"
+  }, 
+  "device": {
+    "model": "MyTablet", 
+    "version": "1", 
+    "type": "tablet", 
+    "uid": "1000001", 
+    "manufacturer": "Google Manufacturer"
+  }, 
+  "dataStreamId": "derived:com.google.step_count.delta:874450078683:Google Manufacturer:MyTablet:1000001:My Data", 
+  "type": "derived"
+}
+
+</textarea>
+
+<p>At the end we get a data stream Id in our response.  This Id can be used for example in the <a href="https://developers.google.com/fit/rest/v1/reference/users/dataSources/datasets/patch"><span id="span1"> Patch Method </span></a> to add data points to a set.  Moreover, in the <strong>console developer dashboard </strong> where you created your project.  The screen should look like this.  See below.  In this picture, we have the traffic based on how many people that have visited your app if there are any, and we also have errors based on the requests that were made.  This showed that 8 requests were made, and there were 4 errors.  In addition, this screen keeps updating itself.  This screen helps you keep track of your API to monitor your data.   </p>
+				
+<br>
+<br>
+	
+<a href="http://tinypic.com?ref=34si1so" target="_blank"><img src="http://i68.tinypic.com/34si1so.png" border="0" alt="Image and video hosting by TinyPic"></a>
+
+<p> I have attached another picture below that will show the updates that were done about two hours later.  Within that time frame, I had made another request that was unsuccessful, and it now show that I have 9 requests with 5 errors, and the page is still keeping track of people of the amount of traffic that has been received.</p>
+
+<br>
+<br>
+<a href="http://tinypic.com?ref=2vkfdom" target="_blank"><img src="http://i66.tinypic.com/2vkfdom.png" border="0" alt="Image and video hosting by TinyPic"></a>
+
+
+
+
+<p>This is it.  We were able to get a background on what an API call is and how it can be used.  In addition we have also been able to use the google fit API to create data.  Moreover there is much more that can be done.  This was a basic step by step guide to get started.  Visit the <a href="https://developers.google.com/fit/rest/v1/reference/"><span id="span1"> Google Fit API Reference </span></a> for more ideas and more data set methods.   </p>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
+
+		
+<br>
+<br>
+<br>
+</div>
+
+
+	
+	
+</div>
+</body>
+</html>
